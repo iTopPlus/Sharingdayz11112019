@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Color Picker</title>
+	</head>
+	<body>
+		<div class="container">
+			<div >
+                <h1 >Colors</h1>
+        
+                    <label>R</label>
+                    <input style=" width:10%;" id="red" type="number" min="0" max="255" placeholder="red number">
+                    <label>G</label>
+                    <input style=" width:10%;" id="green" type="number" min="0" max="255" placeholder="green number">
+                    <label>B</label>
+                    <input style=" width:10%;" id="blue" type="number" min="0" max="255" placeholder="blue number">
+                    
+                <div>
+                    <button onclick="calculatRGB()">click</button>
+                </div>
+                <p id="resultRGB"></p>
+			</div>
+        </div>
+        
+        <!-- Brain.js -->
+        <script src="https://unpkg.com/brain.js@1.1.2/browser.min.js"></script>
+		<script>
+
+            const network = new brain.NeuralNetwork();
+ 
+            network.train([
+                {input:{r: 0, g: 0, b: 0}, output: {white: 1}},
+                {input:{r: 255, g: 255, b: 255}, output: {black: 1}},
+                {input:{r: 255, g: 255, b: 0}, output: {black: 1}},
+                {input:{r: 255, g: 0, b: 0}, output: {black: 1}},
+                {input:{r: 0, g: 255, b: 0}, output: {white: 1}},
+                {input:{r: 0, g: 0, b: 0}, output: {white: 1}}
+            ]);
+            
+            var red = document.querySelector("#red");
+            var green = document.querySelector("#green");
+			var blue = document.querySelector("#blue");
+
+            function calculatRGB(){
+                var output = network.run({r:red.value, g: green.value, b: blue.value});
+                var WorB;
+                if(output.white>output.black){
+                    WorB = "Black";
+                }else{
+                    WorB = "While";
+                }
+                console.log(output);
+                document.getElementById("resultRGB").innerHTML = WorB;
+            }
+
+		</script>
+	</body>
+</html>
