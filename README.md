@@ -1,7 +1,7 @@
 # Sharingdayz11112019
 
 1. EM -> Introduction to NextJS
-2. Tony -> Realtime DB Firebase
+2. Tony -> Realtime DB Firebase + NextJS
 3. Bank -> IS_JS
 4. Bew -> Line Notify
 5. Mint -> UX UI Introduce
